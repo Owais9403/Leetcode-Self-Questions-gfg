@@ -8,8 +8,8 @@ class Solution:
         # code here
         q=[]
         ind=[0]*n
-        res=[]
         vis=[0]*n
+        c=0
         for i in range(n):
             for j in a[i]:
                 ind[j]+=1
@@ -18,14 +18,14 @@ class Solution:
                 q.append(i)
         while(len(q)):
             k=q.pop(0)
-            res.append(k)
+            c+=1
             vis[k]=1
             for i in a[k]:
                 ind[i]-=1
                 if ind[i]==0 and vis[i]==0:
                     q.append(i)
         # print(res)
-        return len(res)!=n
+        return c!=n
         
         
 
