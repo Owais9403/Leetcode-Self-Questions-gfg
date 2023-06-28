@@ -4,32 +4,28 @@
 class Solution:
     
     #Function to detect cycle in a directed graph.
-    def isCyclic(self, n, x):
+    def isCyclic(self, n, a):
         # code here
-        def dfs(x):
-            vis[x]=1
-            pvis[x]=1
-            for i in a[x]:
-                
-                if vis[i]==0:
-                    if dfs(i)==1:
-                        return 1        
-                elif pvis[i]==1:
-                    return 1
-            pvis[x]=0
-            return 0
-
-        a={}
+        q=[]
+        ind=[0]*n
+        res=[]
+        vis=[0]*n
         for i in range(n):
-            a[i]=x[i]
-        vis=[0]*(n)
-        pvis=[0]*(n)
-        
+            for j in a[i]:
+                ind[j]+=1
         for i in range(n):
-            if vis[i]!=1:
-                if dfs(i)==1:
-                    return 1
-        return 0
+            if ind[i]==0:
+                q.append(i)
+        while(len(q)):
+            k=q.pop(0)
+            res.append(k)
+            vis[k]=1
+            for i in a[k]:
+                ind[i]-=1
+                if ind[i]==0 and vis[i]==0:
+                    q.append(i)
+        # print(res)
+        return len(res)!=n
         
         
 
